@@ -1,6 +1,8 @@
 import userModel from '../api/users/userModel';
 import users from './users';
 import dotenv from 'dotenv';
+import genres from './genres';
+import genresData from '../api/genres/genresData';
 import movieModel from '../api/movies/movieModel';
 import movies from './movies.js';
 
@@ -15,6 +17,17 @@ async function loadUsers() {
         console.info(`${users.length} users were successfully stored.`);
     } catch (err) {
         console.error(`failed to Load user Data: ${err}`);
+    }
+}
+
+async function loadGenres() {
+    console.log('load user Data');
+    try {
+        await genresData.deleteMany();
+        await genresData.collection.insertMany(genres);
+        console.info(`${genres.length} genress were successfully stored.`);
+    } catch (err) {
+        console.error(`failed to Load genres Data: ${err}`);
     }
 }
 
